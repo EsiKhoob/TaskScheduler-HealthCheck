@@ -24,22 +24,28 @@ namespace TaskScheduler_HealthCheck
                 LoadFromRegistryForTree(r);
 
             _tasksUnderTasks = LoadFromRegistryForTasks();
-            Console.WriteLine(@"Task Enteries under \Tasks:{0}",_tasksUnderTasks.Count);
+            Console.WriteLine(@"Count of Task enteries under \Tasks:{0}",_tasksUnderTasks.Count);
             _tasksUnderTasks.ExceptWith(_tasksUnderTree);
+            ConsoleColor oldForeground = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(@"Task enteries which exist under \Tasks but not under \Tree:");
-
+            Console.ForegroundColor = oldForeground;
             foreach (var t in _tasksUnderTasks)
                 Console.WriteLine(" {0}", t);
             Console.WriteLine("");
             _tasksUnderTasks = LoadFromRegistryForTasks();
             _tasksUnderTree.ExceptWith(_tasksUnderTasks);
-            //Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(@"Task enteries which exist under \Tree but not under \Tasks:");
+            Console.ForegroundColor = oldForeground;
             foreach (var t in _tasksUnderTree)
                 Console.WriteLine(" {0}", t);
 
             Console.WriteLine("");
+            
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"Registry keys under \Tasks with no information within them (Must be deleted):");
+            Console.ForegroundColor = oldForeground;
             foreach (var t in _orphandEntries)
                 Console.WriteLine(" {0}", t);
             Console.ReadKey();
