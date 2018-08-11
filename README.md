@@ -6,10 +6,11 @@ This program tries to find the cause of Windows Event log`s ERROR ID: 413 (Task 
 as this link suggests:
 https://social.technet.microsoft.com/Forums/windows/en-US/1f677dd3-bdb7-4650-9164-d8e2c66b7708/task-scheduler-error?forum=w7itprogeneral
 
-This program compares 2 limbs of the Windows registry tree where Task information is stored:
+This program compares 2 limbs of the Windows registry tree where Task information is stored:<br>
+  HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree<br>
+  & <br>
+  HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks
 
-    HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree
-  & HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks
 
 The goal, then is to compare the two and expose the differences.  However, it is not ideal:  There are some tasks under \Tree but not under \Tasks, and that is normal and you should not need to delete them.
 
