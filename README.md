@@ -1,23 +1,19 @@
 TaskScheduler-HealthCheck
 =========================
-Note:This program is AS IS ,without no waranty.
+Note:This program is provided AS IS, with no warranty.
 
 This program tries to find the cause of Windows Event log`s ERROR ID: 413 (Task Scheduler service failed to load tasks at service startup. Additional Data: Error Value: 2147942402)
 as this link suggests:
 https://social.technet.microsoft.com/Forums/windows/en-US/1f677dd3-bdb7-4650-9164-d8e2c66b7708/task-scheduler-error?forum=w7itprogeneral
 
-This program compare 2 places of Windows registry where Task`s information is stored ,but do not change anything.
+This program compares 2 limbs of the Windows registry tree where Task information is stored:
 
-HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree
+    HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree
+  & HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks
 
-VS
+The goal, then is to compare the two and expose the differences.  However, it is not ideal:  There are some tasks under \Tree but not under \Tasks, and that is normal and you should not need to delete them.
 
-HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks
-
-Hope we can figure out the problem with looking at the difference of these 2 places.
-Be informed that if there are some Task under \Tree but not under \Tasks, It`s normal and you do not need to delete them.
-
-If you found some registry keys under last title with red color, you should search it`s name all over the registry and delete them to resolve the error.(as far as I experienced)
+If you found some registry keys in the last (of three) tests which is in RED color, you should search for those names in the registry and delete them yourself (by using regedit.exe); in my experience, that will resolve the error.
 
 Programmer: Ehsan Abidi Ashtiani
 Email: AbidiAshtiani@gmail.com
